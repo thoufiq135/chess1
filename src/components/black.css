@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+   box-sizing: border-box;
+}
+
+#table{
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: repeat(8,1fr);
+    width:60vw;
+    height:85vh;
+    position: fixed;
+    right: 30vw;   
+    top:2vh
+}
+.square{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 12vh;
+    width:10vw;
+    font-size:10vh;
+}
+.light {
+    background-color: #f0d9b5;
+  }
+.dark {
+    background-color: #b58863;
+  }
+  #par{
+    height:100vh;
+    width: 100vw;
+    background-color: darkslategrey;
+  }
+#timebla{
+    position: fixed;
+    right:1vw;
+    bottom: 50vh;
+}
+#turnbla{
+    position: fixed;
+    bottom: 50vh;
+}
