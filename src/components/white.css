@@ -45,6 +45,7 @@ body{
     font-weight: bolder;
     color: white;
     border-radius: 2vh;
+  
 }
 #turnwhi{
     position: fixed;
@@ -66,4 +67,44 @@ body{
 .change{
     background-color: #00FF9C;
     backdrop-filter: glow(5px);
+}
+#re{
+    position: fixed;
+    bottom: 10vh;
+    font-size: 3vh;
+    background-color: #00FF9C;
+    height:7vh;
+    width:7vw;
+    border:0.5vh solid white;
+    font-size: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    color: white;
+    border-radius: 2vh;
+    margin-left: 1vw;
+}
+#re:active{
+    border-color: red;
+    color: red;
+}
+.completed{
+    height: 80vh;
+    width:80vw;
+    background-color: #4C585B;
+    font-size: 5vh;
+    font-weight: bolder;
+    color: white;
+    z-index: 7;
+    position: fixed;
+    top:10vh;
+    right: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.not{
+    font-size: 0.1vh;
+    color: #4C585B;
 }

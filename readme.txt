@@ -1,1 +1,1 @@
-https://jazzy-blancmange-e3dcdf.netlify.app/
+https://aesthetic-zuccutto-53f102.netlify.app/whitekingdom

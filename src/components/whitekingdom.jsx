@@ -2,17 +2,58 @@ import './white.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChessRook, faChessKing, faChessBishop, faChessKnight, faChessPawn, faChessQueen } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
-import { pawnHighlight,pawnmove } from '../slice1';
+import { pawnHighlight,pawnmove,RESET } from '../slice1';
 import { selectPiece } from '../slice1';
 
 import { useDispatch,useSelector } from 'react-redux';
 
 function White() {
-    const {selectpiece,Setup,highlight,turn}=useSelector((state)=>state.chess)
+    const {selectpiece,Setup,highlight,turn,checkmate}=useSelector((state)=>state.chess)
   
     let dispatch=useDispatch()
     let [time, settime] = useState({ min: 0, sec: 0 });
+    let [Btime, setBtime] = useState({ min: 0, sec: 0 });
+    let [Wtime, setWtime] = useState({ min: 0, sec: 0 });
+    let [white,setwhite] = useState(true)
 
+
+
+    function handle(r, c, p) {
+        console.log("Clicked square:", { r, c, p });
+    
+        if (p) {
+            dispatch(selectPiece({ r, c, p }));
+            console.log("Selected piece:", selectpiece);
+        }
+    
+
+        function handleMove() {
+            const targetPiece = Setup[r][c];
+    
+            if (!targetPiece) {
+                console.log("Valid move detected");
+            } else {
+                console.log("Cannot capture your own piece");
+            }
+    
+            const movePayload = {
+                from: selectpiece,
+                to: { row: r, col: c, p: selectpiece.p },
+            };
+            console.log("Dispatching move payload:", movePayload);
+            dispatch(pawnmove(movePayload));
+        }
+    
+        if (selectpiece && highlight.some(([row, col]) => row === r && col === c)) {
+            handleMove();
+        } else {
+            console.log("Highlighting moves for pawn");
+            dispatch(pawnHighlight({ r, c, p }));
+        }
+    }
+    
+    
+    
 
     useEffect(() => {
      
@@ -30,28 +71,21 @@ function White() {
         return()=>{clearInterval(interval)}
 
     }, []);
-    function handle(r, c, p) {
-        console.log("Clicked square:", { r, c, p });
+ 
     
-        if (p) {
-            dispatch(selectPiece({ r, c, p }));
-            console.log("Selected piece:", selectpiece);
-        }
     
-        if (selectpiece && highlight.some(([row, col]) => row === r && col === c)) {
-            console.log("Valid move detected");
-            const movePayload = {
-                from: selectpiece,
-                to: { row: r, col: c, p: selectpiece.p },
-            };
-            console.log("Dispatching move payload:", movePayload);
-            dispatch(pawnmove(movePayload));
-        } else {
-            console.log("Highlighting moves for pawn");
-            dispatch(pawnHighlight({ r, c, p }));
-        }
+    
+    
+    
+    
+    
+    
+    
+    function reset(){
+        settime({min:0,sec:0})
+        dispatch(RESET())
+  
     }
-    
 
     function whiteset(row, col, pie) {
         let ishighlight=highlight.some(([r,c])=>r===row&&c===col)  
@@ -79,20 +113,30 @@ function White() {
             </div>
         );
     }
+    console.log("com",checkmate)
 
     return (
         <>
+                <div className={checkmate? "completed":"not"}>Checkmate!</div>
+                <div id="bd">bdead</div>
+                <div id="wdied">whidied</div>
             <div id="par">
+    
                 <div id="turnwhi">{turn}</div>
+                
+                <button id="re" onClick={()=>reset(time)}>RESET</button>
                 <div id="tablewhi">
+               
                     {Setup.map((row, rowindex) =>
                         row.map((pieces, colindex) => whiteset(rowindex, colindex, pieces))
                     )}
+                    
                 </div>
                 <div id="timerwhi">{time.min}:{time.sec}</div>
             </div>
         </>
     );
 }
+
 
 export default White;
