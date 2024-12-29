@@ -118,8 +118,7 @@ function White() {
     return (
         <>
                 <div className={checkmate? "completed":"not"}>Checkmate!</div>
-                <div id="bd">bdead</div>
-                <div id="wdied">whidied</div>
+                
             <div id="par">
     
                 <div id="turnwhi">{turn}</div>
