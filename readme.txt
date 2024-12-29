@@ -1,1 +1,1 @@
-https://aesthetic-zuccutto-53f102.netlify.app/whitekingdom
+https://aesthetic-zuccutto-53f102.netlify.app
